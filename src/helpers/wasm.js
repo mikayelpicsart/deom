@@ -1,0 +1,33 @@
+import { WASM } from '../wasm/demo';
+
+export function _arrayToHeap(typedArray) {
+    const numBytes = typedArray.length * typedArray.BYTES_PER_ELEMENT;
+    const ptr = WASM._malloc(numBytes);
+    const heapBytes = WASM.HEAPU8.subarray(ptr, ptr + numBytes);
+    heapBytes.set(typedArray);
+    return heapBytes;
+}
+
+export function StringToCharPtr(str) {
+    const encoder = new TextEncoder()
+    const view = encoder.encode(str + '\0');
+    return _arrayToHeap(view).byteOffset;
+}
+
+export function getImageData(url) {
+    const canvas2d = document.createElement('canvas');
+    const ctx = canvas2d.getContext('2d');
+    const image = new Image();
+    return new Promise((resolve, reject) => {
+        image.onload = function () {
+            canvas2d.width = image.naturalWidth;
+            canvas2d.height = image.naturalHeight;
+            ctx.drawImage(image, 0, 0);
+            resolve(ctx.getImageData(0, 0, canvas2d.width, canvas2d.height));
+        };
+        image.onerror = reject;
+        image.onabort = reject;
+        image.setAttribute('crossOrigin', '');
+        image.src = url;
+    })
+}

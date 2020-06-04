@@ -13,6 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-wasm": "cd cplus/build && rm -rf ./* && cmake .. -DCMAKE_TOOLCHAIN_FILE=/Users/ma/webassembly/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake && make",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

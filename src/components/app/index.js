@@ -11,9 +11,7 @@ function App() {
       canvasRef.current.width = imageData.width;
       canvasRef.current.height = imageData.height;
       wasm._createContext(imageData.width, imageData.height, StringToCharPtr('canvas'));
-      console.log(imageData);
       const arrayInHeap = _arrayToHeap(imageData.data);
-
       wasm._loadTexture(arrayInHeap.byteOffset, arrayInHeap.length);
       wasm._debug(0);
     })()

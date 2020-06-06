@@ -36,7 +36,7 @@ private:
 // Binding code
 EMSCRIPTEN_BINDINGS(my_class_example)
 {
-    class_<MyClass>("MyClassTEXT")
+    class_<MyClass>("MyClass")
         .constructor<int, std::string>()
         .function("incrementX", &MyClass::incrementX)
         .property("x", &MyClass::getX, &MyClass::setX)

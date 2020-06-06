@@ -1,17 +1,19 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { _arrayToHeap, getImageData, StringToCharPtr } from '../../helpers/wasm';
-import { WasmContext } from '../../helpers/wasm-ready';
+import { WasmContext, IModule } from '../../helpers/wasm-ready';
 
 function App() {
-  const canvasRef = useRef(null);
-  const { wasm, classes: { Test } } = useContext(WasmContext);
+  const canvasRef = useRef<any>(null);
+  const { wasm, classes: { Test } } = useContext<IModule>(WasmContext);
   useEffect(() => {
     (async function () {
       const imageData = await getImageData('https://cdn141.picsart.com/327941520116201.jpg');
-      canvasRef.current.width = imageData.width;
+      canvasRef.current.width = imageData?.width;
       canvasRef.current.height = imageData.height;
+      // @ts-ignore
       wasm._createContext(imageData.width, imageData.height, StringToCharPtr('canvas'));
       const arrayInHeap = _arrayToHeap(imageData.data);
+      // @ts-ignore
       wasm._loadTexture(arrayInHeap.byteOffset, arrayInHeap.length);
       // wasm._debug(0);
     })()

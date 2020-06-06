@@ -34,7 +34,7 @@ private:
 };
 
 // Binding code
-EMSCRIPTEN_BINDINGS(my_class_example)
+EMSCRIPTEN_BINDINGS(my_module)
 {
     class_<MyClass>("MyClass")
         .constructor<int, std::string>()

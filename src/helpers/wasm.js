@@ -2,8 +2,8 @@ import { getWasm } from '../helpers/wasm-ready';
 
 export function _arrayToHeap(typedArray) {
     const numBytes = typedArray.length * typedArray.BYTES_PER_ELEMENT;
-    const ptr = getWasm()._malloc(numBytes);
-    const heapBytes = getWasm().HEAPU8.subarray(ptr, ptr + numBytes);
+    const ptr = getWasm().wasm._malloc(numBytes);
+    const heapBytes = getWasm().wasm.HEAPU8.subarray(ptr, ptr + numBytes);
     heapBytes.set(typedArray);
     return heapBytes;
 }

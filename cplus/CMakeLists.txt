@@ -21,6 +21,11 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD # copy demo.wasm
     COMMENT "copy ${CMAKE_PROJECT_NAME}.wasm to static")
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD # copy demo.wasm
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_SOURCE_DIR}/test.cpp
+    ${CMAKE_SOURCE_DIR}/../public/test.cpp
+    COMMENT "copy ${CMAKE_PROJECT_NAME}.wasm to static")
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD # copy demo.wasm
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
     ${CMAKE_SOURCE_DIR}/main.cpp
     ${CMAKE_SOURCE_DIR}/../public/main.cpp
     COMMENT "copy ${CMAKE_PROJECT_NAME}.wasm to static")

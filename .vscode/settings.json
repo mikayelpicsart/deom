@@ -1,0 +1,13 @@
+{
+    "C_Cpp.default.includePath": [
+        "/Users/ma/webassembly/emsdk/upstream/emscripten/system/include",
+        "${default}"
+    ],
+    "cSpell.words": [
+        "EMSCRIPTEN",
+        "webgl"
+    ],
+    "files.associations": {
+        "*.tcc": "cpp"
+    },
+}

@@ -2,19 +2,16 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/app';
-import { useOnRuntimeInitializedReady } from './helpers/wasm-ready';
+import { ReadyWasm } from './helpers/wasm-ready';
 import * as serviceWorker from './serviceWorker';
 
-function ReadyWasm({ children }) {
-  useOnRuntimeInitializedReady();
-  return children;
-}
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback="Loading ..." >
       <ReadyWasm>
-        jijiji
+        <App />
       </ReadyWasm>
     </Suspense>
   </React.StrictMode>,

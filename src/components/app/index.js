@@ -16,6 +16,15 @@ function App() {
       wasm._debug(0);
     })()
   }, [wasm]);
+
+  useEffect(() => {
+    var instance = new wasm.MyClass(10, "hello");
+    instance.incrementX();
+    console.log(instance.x); // 11
+    instance.x = 20; // 20
+    console.log(wasm.MyClass.getStringFromInstance(instance)); // "hello"
+    instance.delete();
+  }, [wasm]);
   return (
     <div >
       <canvas id='canvas' ref={canvasRef} />

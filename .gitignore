@@ -25,4 +25,3 @@ yarn-error.log*
 #wasm
 cplus/build/*
 public/demo*
-src/wasm/*

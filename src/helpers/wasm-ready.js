@@ -1,6 +1,5 @@
 import React, { createContext } from 'react';
-import WASM from '../wasm/demo';
-import { wrapper } from '../wasm/wrraper';
+import { initializeLibrary } from '../wasm/pi_helper';
 
 export const WasmContext = createContext(null);
 
@@ -23,8 +22,8 @@ function useOnRuntimeInitializedReady() {
         throw onRuntimeInitialized.promise;
     }
     if (onRuntimeInitialized.status === 'not-init') {
-        throw onRuntimeInitialized.promise = WASM().then(wasm => {
-            onRuntimeInitialized.module = { classes: wrapper(wasm), wasm };
+        throw onRuntimeInitialized.promise = initializeLibrary().then(wasm => {
+            onRuntimeInitialized.module = wasm;
             onRuntimeInitialized.status = 'resolve';
         })
     }
